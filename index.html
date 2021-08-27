@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz and Leaderboard</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-300">
+    <section class="p-5 lg:text-2xl text-xl">
+        <div class="flex justify-center">
+            <div class="lg:w-4/12 md:w-8/12 w-full">
+                <!-- HOME -->
+                <div id="home_container" class="">
+                    <div id="header" class="flex-col justify-center text-center mb-3">
+                        <div class="flex justify-center">
+                            <canvas id="canvas" width="300" height="300"></canvas>
+                        </div>
+                        <div id="headerText"></div>
+                    </div>
+
+                    <!-- CONTAINER BODY 1 - WELCOME -->
+                    <div id="body_welcome" class="flex-col text-center">
+                        <p id="question" class="text-4xl font-medium -mt-10 mb-3">KMX Quiz</p>
+                        <p class="mb-5">
+                            Welcome! <br>
+                            This is a replication attempt of an actual project.
+                        </p>
+                        <p class="mb-10">Click Start Quiz to begin</p>
+                        
+                        <button id="startButton" class="w-full mb-3 border-2 border-blue-800 bg-blue-800 rounded-full font-bold text-white px-3 py-2 transition duration-300 ease-in-out transform hover:-translate-y-1 mr-6">
+                            Start Quiz
+                        </button>
+                        <button id="leaderboardButton" class="w-full border-2 border-blue-800 rounded-full font-bold text-blue-800 px-3 py-2 transition duration-300 ease-in-out hover:bg-blue-800 hover:text-white mr-6">
+                            Leaderboard
+                        </button>
+                    </div>
+
+                    <!-- CONTAINER BODY 2 - LOGIN -->
+                    <div id="body_login" class="flex-col text-center hidden">
+                        <p id="question" class="text-4xl font-medium -mt-10 mb-3">KMX Quiz</p>
+                        <p class="mb-5">Before starting the quiz you must enter your Full Name and your Email Address</p>
+                        
+                        <div class="relative mb-3 text-gray-600">
+                            <input type="text" id="inputName" placeholder="Full Name" class="w-full h-10 px-5 pr-10 py-5 border-2 border-blue-700 bg-white rounded-full text-sm focus:outline-none text-xl">
+                        </div>
+
+                        <div class="relative mb-10 text-gray-600">
+                            <input type="search" id="inputEmail" placeholder="Email Address" class="w-full border-2 border-blue-700 bg-white h-10 px-5 py-5 pr-10 rounded-full text-sm focus:outline-none text-xl">
+                        </div>
+
+                        <button id="loginButton" class="w-full mb-3 bg-blue-800 border-2 border-blue-800 rounded-full font-bold text-white px-3 py-2 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:text-white mr-6 disabled:bg-black">
+                            Start Quiz
+                        </button>
+                        <button id="backButton" class="w-full mb-3 border-2 border-blue-800 rounded-full font-bold text-blue-800 px-3 py-2 transition duration-300 ease-in-out hover:bg-blue-800 hover:text-white mr-6">
+                            Back
+                        </button>
+                    </div>
+                </div>
+
+                <!-- QUIZFIRST -->
+                <div id="quizFirst_container" class="hidden">
+                    <!-- HEADER -->
+                    <div id="header" class="flex-col justify-center text-center mb-3">
+                        <div class="flex justify-center">
+                            <canvas id="canvas" width="300" height="300"></canvas>
+                        </div>
+                        <div id="headerText"></div>
+                    </div>
+
+                    <!-- BODY 1 - START SCREEN -->
+                    <div id="body_start" class="flex-col">
+                        <p class="text-center font-medium mb-8">You will get two attempts at this quiz.</p>
+                        <p class="mb-3">
+                            <span class="font-medium">1st Attempt:</span> None-timed practice so take your time and ensure your answers are correct
+                        </p>
+                        <p class="mb-10">
+                            <span class="font-medium">2nd Attempt:</span> Your second attempt is timed and scored, try to get through this as fast as possible for a higher score.
+                        </p>
+                        
+                        <button id="startButton" class="w-full border-2 border-blue-800 rounded-full font-bold text-blue-800 px-3 py-1 transition duration-300 ease-in-out hover:bg-blue-800 hover:text-white mr-6">
+                            Start Quiz
+                        </button>
+                    </div>
+
+                    <!-- BODY 2 - QUIZ -->
+                    <div id="body_quiz" class="flex-col hidden">
+                        <hr class="mb-5" style="height:1px;border-width:0;color:gray;background-color:gray">
+                        <p id="question" class="font-medium mb-5"></p>
+                        <div id="choices" class="flex-col mb-8"></div>
+                        
+                        <button id="nextButton" class="w-full border-2 border-blue-800 rounded-full font-bold text-blue-800 px-3 py-2 transition duration-300 ease-in-out hover:bg-blue-800 hover:text-white mr-6">
+                            Next
+                        </button>
+                    </div>
+
+                    <!-- BODY 3 - QUIZ COMPLETE -->
+                    <div id="body_complete" class="flex-col mb-5 hidden">
+                        <hr class="mb-5" style="height:1px;border-width:0;color:gray;background-color:gray">
+                        <p id="correct" class="text-center font-medium mb-5">Correct</p>
+                        <div id="body_complete_items"></div>
+                    </div>
+                </div>
+
+                <!-- QUIZSECOND -->
+                <div id="quizSecond_container" class="hidden">
+                    <!-- HEADER -->
+                    <div id="header" class="flex-col justify-center text-center mb-3">
+                        <div class="flex justify-center">
+                            <canvas id="canvas" width="300" height="300"></canvas>
+                        </div>
+                        <div id="headerText"></div>
+                        <span id="time" class="text-base"></span>
+                    </div>
+
+                    <!-- BODY 1 - QUIZ -->
+                    <div id="body_quiz" class="flex-col">
+                        <hr class="mb-5" style="height:1px;border-width:0;color:gray;background-color:gray">
+                        <p id="question" class="font-medium mb-5"></p>
+                        <div id="choices" class="flex-col mb-8"></div>
+                        
+                        <button id="nextButton" class="w-full border-2 border-blue-800 rounded-full font-bold text-blue-800 px-3 py-2 transition duration-300 ease-in-out hover:bg-blue-800 hover:text-white mr-6">
+                            Next
+                        </button>
+                    </div>
+
+                    <!-- BODY 2 - QUIZ COMPLETE -->
+                    <div id="body_complete" class="flex-col mb-5 hidden">
+                        <hr class="mb-5" style="height:1px;border-width:0;color:gray;background-color:gray">
+                        <p id="correct" class="text-center font-medium mb-5">Correct</p>
+                        <p id="score" class="text-center font-medium mb-5">Score</p>
+                        <div id="body_complete_items"></div>
+                    </div>
+                </div>
+
+                <!-- LEADERBOARD -->
+                <div id="leaderboard_container" class="hidden">
+                    <!-- HEADER -->
+                    <div id="header" class="flex-col justify-center text-center mb-5">
+                        <div class="flex justify-center">
+                            <canvas id="canvas" width="300" height="300"></canvas>
+                        </div>
+                        <div id="headerText" class="-mt-10 text-2xl">Leaderboard</div>
+                    </div>
+
+                    <!-- BODY 1  -->
+                    <div class="flex-col text-lg">
+                        <div class="container flex-col mx-auto w-full items-center justify-center mb-5">
+                            <div id="preloader" class="flex items-center justify-center w-full h-full mb-5">
+                                <div class="flex-col justify-center items-center space-x-1 text-sm text-gray-700">
+                                    <svg fill='none' class="w-25 h-25 animate-spin" viewBox="0 0 32 32" xmlns='http://www.w3.org/2000/svg'>
+                                        <path clip-rule='evenodd'
+                                            d='M15.165 8.53a.5.5 0 01-.404.58A7 7 0 1023 16a.5.5 0 011 0 8 8 0 11-9.416-7.874.5.5 0 01.58.404z'
+                                            fill='currentColor' fill-rule='evenodd' />
+                                    </svg>
+                                    <div class="text-xl">Updating</div>
+                                </div>
+                            </div>
+
+                            <ul id="list" class="flex flex-col w-full">
+                            </ul>
+                        </div>
+                        
+                        <button id="homeButton" class="w-full border-2 border-blue-800 rounded-full font-bold text-blue-800 px-3 py-2 transition duration-300 ease-in-out hover:bg-blue-800 hover:text-white mr-6">
+                            Home
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="vendors/jquery/jquery-3.6.0.min.js"></script>
+
+    <script src="assets/js/class/r4nkt/R4nkt_Leaderboards.js"></script>
+    <script src="assets/js/class/r4nkt/R4nkt_Players.js"></script>
+    <script src="assets/js/class/r4nkt/R4nkt_Scores.js"></script>
+
+    <script src="assets/js/class/Home.js"></script>
+    <script src="assets/js/class/QuizFirst.js"></script>
+    <script src="assets/js/class/QuizSecond.js"></script>
+    <script src="assets/js/class/Leaderboard.js"></script>
+
+    <script src="assets/js/class/misc/Header.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
