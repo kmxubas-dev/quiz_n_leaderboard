@@ -34,7 +34,7 @@ class R4nkt_Leaderboards {
             headers: { 
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                'Authorization': 'Bearer GgxxYLV2fsaQATKyuty7iDEI0oYR1jTz4illEseL'
+                'Authorization': 'Bearer QWAFuT2gw1lOlBOjzoVaHHyEioM4aA4fN2JOLkAA'
             },
         }
         if (method !== 'GET') settings.body = JSON.stringify(data);
