@@ -64,9 +64,9 @@ var main = {};
 
 // Instanciations of r4nkt Modules.
 main.r4nkt = {
-    leaderboard: new R4nkt_Leaderboards('J0RYKM8VX6', 'quiz_n_leaderboard___test'),
-    player: new R4nkt_Players('J0RYKM8VX6'),
-    score: new R4nkt_Scores('J0RYKM8VX6'),
+    leaderboard: new R4nkt_Leaderboards('6P94W27YD8', 'quiz_n_leaderboard___test'),
+    player: new R4nkt_Players('6P94W27YD8'),
+    score: new R4nkt_Scores('6P94W27YD8'),
 };
 
 // Player Information - to be used in r4nkt player.
